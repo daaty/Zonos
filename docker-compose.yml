@@ -2,15 +2,16 @@ version: '3.8'
 
 services:
   zonos:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: python:3.10-slim
     container_name: zonos_container
-    runtime: nvidia
-    network_mode: "host"
     stdin_open: true
     tty: true
-    command: ["python3", "gradio_interface.py"]
+    working_dir: /app
+    volumes:
+      - ./:/app
     environment:
-      - NVIDIA_VISIBLE_DEVICES=0
       - GRADIO_SHARE=False
+      - GRADIO_SERVER_PORT=7860
+    ports:
+      - "7860:7860"
+    command: bash -c "pip install --upgrade pip uv torch setuptools packaging inflect kanjize numpy phonemizer sudachidict-full sudachipy torchaudio transformers soundfile huggingface-hub gradio && apt update && apt install -y espeak-ng build-essential && python gradio_interface.py"
