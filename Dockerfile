@@ -10,7 +10,7 @@ WORKDIR /app
 COPY . ./
 
 RUN uv pip install --system -e .
-RUN uv pip install --system -e .[compile]
+## Dependências opcionais removidas para evitar erro de build em ambiente sem GPU
 EXPOSE 7860
 
 # Se não houver GPU, pode usar uma imagem base sem CUDA, por exemplo:
