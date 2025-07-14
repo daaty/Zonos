@@ -1,5 +1,5 @@
 FROM python:3.10-slim
-RUN pip install --upgrade pip uv
+RUN pip install --upgrade pip && pip install uv
 
 RUN apt update && \
     apt install -y espeak-ng && \
