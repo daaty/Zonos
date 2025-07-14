@@ -13,7 +13,4 @@ RUN uv pip install --system -e .
 ## Dependências opcionais removidas para evitar erro de build em ambiente sem GPU
 EXPOSE 7860
 
-# Se não houver GPU, pode usar uma imagem base sem CUDA, por exemplo:
-# FROM python:3.10-slim
-
 CMD ["python", "gradio_interface.py"]
