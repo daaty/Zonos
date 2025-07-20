@@ -2,15 +2,14 @@ version: '3.8'
 
 services:
   zonos:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: stanchino/zonos:20250409-0f52b38
     ports:
       - "7860:7860"
     stdin_open: true
     tty: true
-    command: ["python", "gradio_interface.py"]
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - GRADIO_SHARE=False
       - GRADIO_SERVER_PORT=7860
+    deploy:
+      replicas: 1
