@@ -9,6 +9,6 @@ WORKDIR /app
 COPY . ./
 
 RUN uv pip install --system -e . && uv pip install --system -e .[compile]
-EXPOSE 7860
 
+EXPOSE 7860
 CMD ["python", "gradio_interface.py"]
