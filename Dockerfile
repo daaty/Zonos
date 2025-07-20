@@ -1,16 +1,14 @@
-FROM python:3.10-slim
-RUN pip install --upgrade pip && pip install uv
+FROM pytorch/pytorch:2.6.0-cuda12.4-cudnn9-devel
+RUN pip install uv
 
 RUN apt update && \
     apt install -y espeak-ng && \
-    apt install -y build-essential && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY . ./
 
-RUN uv pip install --system -e .
-## Dependências opcionais removidas para evitar erro de build em ambiente sem GPU
+RUN uv pip install --system -e . && uv pip install --system -e .[compile]
 EXPOSE 7860
 
 CMD ["python", "gradio_interface.py"]
